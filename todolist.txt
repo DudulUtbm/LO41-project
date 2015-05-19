@@ -1,0 +1,29 @@
+Objectifs
+
+--- TODO LIST ---
+*threads representant les voitures.
+chaque thread porte les infos suivantes : 
+-type de véhicule /*DONE*/
+-vitesse (a faire plus tard)
+-position /*DONE*/
+-itiniéraire /*DONE*/
+-autres ?
+
+*echangeurs représenté par des ressources critiques
+infos dispo a l'échangeur :
+-nb total de véhicule
+-type de véhicules
+
+a créer en plusieurs version :
+- 1 seul véhicule peut passer dans l'échangeur peut importe la direction
+- plusieurs véhicules peuvent passer si ils ne se croisent pas
+
+/-\ créer différentes file d'attente : pour chaque direction d'attente (N,E,S,O) 1 file pour chaque direction de sortie.
+Choix de la file d'attente avec un round robin avec priorisations ?
+
+
+*stratégie de passages :
+-prioriser les véhicules prioritaires
+-limiter le temps d'attente des autres véhicules 
+-fluidifier le trafic 
+
