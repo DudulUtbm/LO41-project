@@ -17,8 +17,11 @@ chaque thread porte les infos suivantes :
 *echangeurs représenté par des ressources critiques
 infos dispo a l'échangeur :
 -nb total de véhicule (DONE)
--files d'attente pour chaque direction
--type de véhicules  ?
+-files d'attente pour chaque direction (DONE)
+-pointeurs sur la prochaine file d'attente ?
+
+
+
 
 a créer en plusieurs version :
 - 1 seul véhicule peut passer dans l'échangeur peut importe la direction

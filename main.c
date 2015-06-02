@@ -10,8 +10,6 @@
 
 #include "main.h"
 
-#define NUM_INTERCHANGE	4
-#define NUM_VEHICLES	10
 
 //COMMON FUNCTIONS
 
@@ -54,29 +52,9 @@ void *creationVehicule(void *data)
 	    newVehicule.itineraire = get_random(8);
     }while(newVehicule.position==newVehicule.itineraire);
 
+//    enter_interchange(newVehicule.num); //fonction d'arriver dans un échangeur
+
     AfficheEtatV(&newVehicule);
-    pthread_exit(NULL);
-
-}
-
-//INTERCHANGE FUNCTIONS
-
-void AfficheEtatI(echangeur* current)
-{
-
-    printf("\nJe suis l'echangeur  #%ld \nde TID : %ld \n j'ai %d vehicules ici \n",current->num,(long) pthread_self(),current->nbV);
-    fflush(stdout);
-}
-
-
-void *creationEchangeur(void *data)
-{
-    echangeur newEchangeur;
-
-    newEchangeur.num = (long) data;
-    newEchangeur.nbV = 0;
-
-    AfficheEtatI(&newEchangeur);
     pthread_exit(NULL);
 
 }
@@ -86,6 +64,18 @@ void *creationEchangeur(void *data)
 
 int main(void)
 {
+
+    int i;
+
+	
+	//INTERCHANGE
+    echangeur Echangeur_id[NUM_INTERCHANGE];
+	
+    for (i = 0; i < NUM_INTERCHANGE; i++) {
+	Echangeur_id[i].nbV=0;
+
+  }
+
 	//THREAD INIT
 	pthread_attr_t thread_attr;
 
@@ -101,20 +91,7 @@ int main(void)
   }
 	//THREAD CREATION
 
-    int i;
-	// j'ai peut etre bossé pour rien... les échangeurs devaient ^etre des ressources critique
-    	//INTERCHANGE
-    pthread_t Ethread_id[NUM_INTERCHANGE];
-	
-    for (i = 0; i < NUM_INTERCHANGE; i++) {
-
-	if (pthread_create (&Ethread_id[i], &thread_attr,creationEchangeur ,(void*)i) < 0) {
-          fprintf (stderr, "pthread_create error for thread \n");
-        exit (1);
-  }
-	 
-    }
-    	//VEHICLES
+    	    	//VEHICLES
 	pthread_t Vthread_id[NUM_VEHICLES];
 	
     for (i = 0; i < NUM_VEHICLES; i++) {

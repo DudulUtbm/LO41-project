@@ -2,7 +2,11 @@
 #define MAIN_H_
 
 //header of the main file
-//
+
+#define CAPACITE 10  
+#define NUM_INTERCHANGE	4
+#define NUM_VEHICLES	10
+
 typedef struct vehicule
 {
 	    int type;
@@ -14,7 +18,10 @@ typedef struct vehicule
 typedef struct echangeur
 {
 	    int nbV;
-	    long num;
+	    pthread_t nord[CAPACITE];
+	    pthread_t sud[CAPACITE];
+	    pthread_t est[CAPACITE];
+	    pthread_t ouest[CAPACITE];
 }echangeur ;
 
 
