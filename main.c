@@ -102,7 +102,7 @@ int main(void)
 	//THREAD CREATION
 
     int i;
-
+	// j'ai peut etre bossé pour rien... les échangeurs devaient ^etre des ressources critique
     	//INTERCHANGE
     pthread_t Ethread_id[NUM_INTERCHANGE];
 	
