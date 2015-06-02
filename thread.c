@@ -8,6 +8,15 @@
 #include <errno.h>
 #define NUM_THREADS	10
 
+typedef struct vehicule vehicule;
+struct vehicule
+{
+	    int type;
+	    int position;
+	    int itineraire;
+	    long num;
+};
+
 void erreur(const char *msg)
 {
     perror(msg);
@@ -22,28 +31,33 @@ int get_random (int max){
 	    return ((int) val);
 }
 
-void *AfficheEtat(void *data)
+void AfficheEtat(vehicule* current)
 {
 
-    long num;
-    int type, position, itineraire;
-    num = (long) data;
+    printf("\nJe suis la voiture  #%ld \nde TID : %ld \nde type %d \nje pars de %d et je vais à %d\n",current->num,(long) pthread_self(),current->type,current->position,current->itineraire);
+    fflush(stdout);
+}
+
+
+void *creationVehicule(void *data)
+{
+    vehicule newVehicule;
+    newVehicule.num = (long) data;
     /* random pour le type de voiture 0->normal 1->prioritaire.
      * random pour la position 
      * random pour l'itinéraire
     */
-    type = get_random(2); 
-    position = get_random(8);
+    newVehicule.type = get_random(2); 
+    newVehicule.position = get_random(8);
     do{
-	    itineraire = get_random(8);
-    }while(position==itineraire);
+	    newVehicule.itineraire = get_random(8);
+    }while(newVehicule.position==newVehicule.itineraire);
 
-
-
-    printf("\nJe suis la voiture  #%ld \nde TID : %ld \nde type %d \nje pars de %d et je vais à %d\n",num,(long) pthread_self(),type,position,itineraire);
-    fflush(stdout);
+    AfficheEtat(&newVehicule);
     pthread_exit(NULL);
+
 }
+
 
 int main(void)
 {
@@ -65,7 +79,7 @@ int main(void)
 	
     for (i = 0; i < NUM_THREADS; i++) {
 
-	if (pthread_create (&thread_id[i], &thread_attr, AfficheEtat,(void*)i) < 0) {
+	if (pthread_create (&thread_id[i], &thread_attr,creationVehicule ,(void*)i) < 0) {
           fprintf (stderr, "pthread_create error for thread 1\n");
         exit (1);
   }
