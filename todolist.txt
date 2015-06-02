@@ -1,6 +1,11 @@
 Objectifs
 
 --- TODO LIST ---
+
+*Main thread. Qui crée les structures d'échanges de données et sert d'intermédiaires entre les échangeur et les véhicules
+de sorte a réguler le trafic. 
+
+
 *threads representant les voitures.
 chaque thread porte les infos suivantes : 
 -type de véhicule /*DONE*/
@@ -11,8 +16,9 @@ chaque thread porte les infos suivantes :
 
 *echangeurs représenté par des ressources critiques
 infos dispo a l'échangeur :
--nb total de véhicule
--type de véhicules
+-nb total de véhicule (DONE)
+-files d'attente pour chaque direction
+-type de véhicules  ?
 
 a créer en plusieurs version :
 - 1 seul véhicule peut passer dans l'échangeur peut importe la direction
@@ -26,4 +32,7 @@ Choix de la file d'attente avec un round robin avec priorisations ?
 -prioriser les véhicules prioritaires
 -limiter le temps d'attente des autres véhicules 
 -fluidifier le trafic 
+
+
+-> Les véhicules doivent signaler leur présence en arrivant dans un échangeur et indiquer quand ils partent.
 
