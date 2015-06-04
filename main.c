@@ -80,8 +80,14 @@ int sortir_liste(file_Attente attente) //fonction qui retire le véhicule en tet
 }
 
 void ajouter_liste(file_Attente attente, vehicule vehicule){
+	attente.list[nbAttente]=vehicule.num;
+	attente.nbAttente++;
+}
 
-
+void print_liste(file_Attente attente){
+	for(int i=0;i<attente.nbAttente;++i){
+		printf("[%d] vehicule n°%d \n",i,attente.list[i]);
+	}	
 }
 
 //MAIN FUNCTION
@@ -90,7 +96,6 @@ int main(void)
 {
 
     int i;
-
 	
 	//INTERCHANGE
     echangeur Echangeur_id[NUM_INTERCHANGE];

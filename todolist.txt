@@ -47,6 +47,7 @@ Travail pour 100Triques(essaye de le faire d'ici ce week-end) :
 
 - créer la fonction enter_interchange  ( void enter_interchange(long numVehicule); )
 Elle doit ajouter dans la structure (les bonnes files d'attente) des echangeurs l'id des véhicules. 
+Utilise les fonctions de la structure liste attente (ça permettra de la tester)
 
 Travail pour DUDUL : 
 
