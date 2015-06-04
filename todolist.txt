@@ -21,8 +21,6 @@ infos dispo a l'échangeur :
 -pointeurs sur la prochaine file d'attente ?
 
 
-
-
 a créer en plusieurs version :
 - 1 seul véhicule peut passer dans l'échangeur peut importe la direction
 - plusieurs véhicules peuvent passer si ils ne se croisent pas
@@ -30,6 +28,12 @@ a créer en plusieurs version :
 /-\ créer différentes file d'attente : pour chaque direction d'attente (N,E,S,O) 1 file pour chaque direction de sortie.
 Choix de la file d'attente avec un round robin avec priorisations ?
 
+Une liste d'attente c'est : 
+
+-un tableau dans lequel on peut faire :
+*récupérer le véhicule en tete et décaler les autres véhicules
+-un truc qui dit combien de véhicules sont en attente
+-un truc qui retient quand elle a été utilisé pour la denrière fois.
 
 *stratégie de passages :
 -prioriser les véhicules prioritaires
@@ -38,4 +42,19 @@ Choix de la file d'attente avec un round robin avec priorisations ?
 
 
 -> Les véhicules doivent signaler leur présence en arrivant dans un échangeur et indiquer quand ils partent.
+
+Travail pour 100Triques(essaye de le faire d'ici ce week-end) : 
+
+- créer la fonction enter_interchange  ( void enter_interchange(long numVehicule); )
+Elle doit ajouter dans la structure (les bonnes files d'attente) des echangeurs l'id des véhicules. 
+
+Travail pour DUDUL : 
+
+- gestion des ressources critiques (acces aux échangeurs)
+
+Travail quand terminé : 
+
+-Gérer le round robin dans les files d'attente.
+-Gérer les priorités
+
 

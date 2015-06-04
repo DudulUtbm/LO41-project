@@ -52,13 +52,37 @@ void *creationVehicule(void *data)
 	    newVehicule.itineraire = get_random(8);
     }while(newVehicule.position==newVehicule.itineraire);
 
-//    enter_interchange(newVehicule.num); //fonction d'arriver dans un échangeur
+//    enter_interchange(newVehicule.num); //fonction d'arrivé dans un échangeur
 
     AfficheEtatV(&newVehicule);
     pthread_exit(NULL);
 
 }
 
+//File d'attente
+void init_liste(file_Attente attente){
+
+	for(int i=0;i<CAPACITE;+i){
+		attente.list[i]=-1;
+	}
+
+}
+
+int sortir_liste(file_Attente attente) //fonction qui retire le véhicule en tete de la liste
+{
+	vehicule current,tmp;
+	current=attente.list[0];
+
+	for(int i=0;i<attente.nbAttente;++i){
+		attente.list[i]=attente.list[i+1];	
+	}
+	attente.list[i]=-1;
+}
+
+void ajouter_liste(file_Attente attente, vehicule vehicule){
+
+
+}
 
 //MAIN FUNCTION
 

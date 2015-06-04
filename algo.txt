@@ -1,0 +1,20 @@
+- Algo -
+
+INIT des véhicules :
+
+init des variables
+entré des véhicules dans les bonnes listes d'attente
+Appel de la fonction de gestion
+
+
+GESTION des véhicules :
+
+demande d'entré dans un échangeur
+-attente de l'accord
+passage dans l'échangeur
+quitte la liste d'attente (si il y a de la place dans la liste de destination)
+entre dans une nouvelle liste d'attente ou quitte la zone et meurt
+
+
+GESTION des files d'attente :
+
