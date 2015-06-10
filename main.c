@@ -64,6 +64,8 @@ void init_liste(file_Attente attente){
 	for(int i=0;i<CAPACITE;+i){
 		attente.list[i]=-1;
 	}
+	attente.lastUsed=0;
+	attente.nbAttente=0;
 
 }
 
@@ -76,6 +78,8 @@ int sortir_liste(file_Attente attente) //fonction qui retire le véhicule en tet
 		attente.list[i]=attente.list[i+1];	
 	}
 	attente.list[i]=-1;
+	attente.nbAttente--;
+	attente.lastUsed++;
 
 	return current;
 }
@@ -90,6 +94,8 @@ void print_liste(file_Attente attente){
 	for(int i=0;i<attente.nbAttente;++i){
 		printf("[%d] vehicule n°%d \n",i,attente.list[i]);
 	}	
+	printf("lastUsed = %d\n",attente.lastUsed);
+	printf("nbAttente = %d\n",attente.nbAttente);
 }
 
 file_Attente min_veh(echangeur echangeur){
@@ -114,6 +120,27 @@ file_Attente max_veh(echangeur echangeur){
 
 }
 
+file_Attente last_used(echangeur echangeur){
+	
+	int i=0;
+	file_Attente minimum=echangeur.file_attente[i];
+	for(i=1;i<4;i++){
+		if(echangeur.file_attente[i].lastUsed<minimum.lastUsed)minimum=echangeur.file_attente[i];
+	}
+	return minimum;
+
+}
+
+file_Attente recently_used(echangeur echangeur){
+	
+	int i=0;
+	file_Attente maximum=echangeur.file_attente[i];
+	for(i=1;i<4;i++){
+		if(echangeur.file_attente[i].lastUsed>maximum.lastUsed)maximum=echangeur.file_attente[i];
+	}
+	return maximum;
+
+}
 //ROUND ROBIN
 
 void round_robin(echangeur echangeur){

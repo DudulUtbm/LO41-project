@@ -43,6 +43,9 @@ void init_liste(file_Attente attente); //fonction qui initiale une liste d'atten
 void ajouter_liste(file_Attente attente, vehicule vehicule); //fonction qui ajoute un véhiculeà une liste d'attente
 file_Attente min_veh(echangeur echangeur);//retourne la file d'attente avec le nb minimum de vehicule
 file_Attente max_veh(echangeur echangeur);//retourne la file d'attente avec le nb maximum de vehicule
+file_Attente recently_used(echangeur echangeur);//retourne la file d'attente avec utilisé le plus recement
+file_Attente last_used(echangeur echangeur);//retourne la file d'attente avec utilisé il y le plus longtemps
+
 void round_robin(echangeur echangeur); //fonction qui gère le round robin
 
 #endif 
