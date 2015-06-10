@@ -58,4 +58,4 @@ Travail quand terminé :
 -Gérer le round robin dans les files d'attente.
 -Gérer les priorités
 
-
+En bonus : créer des fichiers .c et .h différents (eventuellement des bibliothéques lors de la compilation)

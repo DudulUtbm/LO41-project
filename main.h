@@ -25,10 +25,11 @@ typedef struct file_Attente
 typedef struct echangeur
 {
 	    int nbV;
-	    file_Attente nord;
-	    file_Attente sud;
-	    file_Attente est;
-	    file_Attente ouest;
+	    file_Attente file_attente[4];
+/*	    file_Attente nord; id=0
+	    file_Attente sud; id=1
+	    file_Attente est; id=2
+	    file_Attente ouest; id=3  */
 }echangeur ;
 
 
@@ -40,6 +41,8 @@ void enter_interchange(long numVehicule); //fonction d'arrivé dans un échangeu
 int sortir_liste(file_Attente attente); //fonction qui retire le véhicule en tete de la liste
 void init_liste(file_Attente attente); //fonction qui initiale une liste d'attente
 void ajouter_liste(file_Attente attente, vehicule vehicule); //fonction qui ajoute un véhiculeà une liste d'attente
-
+file_Attente min_veh(echangeur echangeur);//retourne la file d'attente avec le nb minimum de vehicule
+file_Attente max_veh(echangeur echangeur);//retourne la file d'attente avec le nb maximum de vehicule
+void round_robin(echangeur echangeur); //fonction qui gère le round robin
 
 #endif 

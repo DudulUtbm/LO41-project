@@ -92,9 +92,32 @@ void print_liste(file_Attente attente){
 	}	
 }
 
+file_Attente min_veh(echangeur echangeur){
+	
+	int i=0;
+	file_Attente minimum=echangeur.file_attente[i];
+	for(i=1;i<4;i++){
+		if(echangeur.file_attente[i].nbAttente>0 && echangeur.file_attente[i].nbAttente<minimum.nbAttente)minimum=echangeur.file_attente[i];
+	}
+	return minimum;
+
+}
+
+file_Attente max_veh(echangeur echangeur){
+	
+	int i=0;
+	file_Attente maximum=echangeur.file_attente[i];
+	for(i=1;i<4;i++){
+		if(echangeur.file_attente[i].nbAttente>maximum.nbAttente)maximum=echangeur.file_attente[i];
+	}
+	return maximum;
+
+}
+
 //ROUND ROBIN
 
-void round_robin(echangeur interchange){
+void round_robin(echangeur echangeur){
+
 
 	
 
