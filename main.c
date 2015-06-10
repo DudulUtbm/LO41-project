@@ -1,4 +1,3 @@
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <sys/wait.h>
@@ -32,7 +31,7 @@ int get_random (int max){
 void AfficheEtatV(vehicule* current)
 {
 
-    printf("\nJe suis la voiture  #%ld \nde TID : %ld \nde type %d \nje pars de %d et je vais à %d\n",current->num,(long) pthread_self(),current->type,current->position,current->itineraire);
+    printf("\nJe suis la voiture  #%d \nde TID : %ld \nde type %d \nje pars de %d et je vais à %d\n",current->num,(long) pthread_self(),current->type,current->position,current->itineraire);
     fflush(stdout);
 }
 
@@ -45,7 +44,7 @@ void *creationVehicule(void *data)
     */
     vehicule newVehicule;
 
-    newVehicule.num = (long) data;
+    newVehicule.num = (int) data;
     newVehicule.type = get_random(2); 
     newVehicule.position = get_random(8);
     do{
@@ -70,24 +69,35 @@ void init_liste(file_Attente attente){
 
 int sortir_liste(file_Attente attente) //fonction qui retire le véhicule en tete de la liste
 {
-	vehicule current,tmp;
+	int current,tmp,i;
 	current=attente.list[0];
 
-	for(int i=0;i<attente.nbAttente;++i){
+	for(i=0;i<attente.nbAttente;++i){
 		attente.list[i]=attente.list[i+1];	
 	}
 	attente.list[i]=-1;
+
+	return current;
 }
 
 void ajouter_liste(file_Attente attente, vehicule vehicule){
-	attente.list[nbAttente]=vehicule.num;
+	attente.list[attente.nbAttente]=vehicule.num;
 	attente.nbAttente++;
 }
 
 void print_liste(file_Attente attente){
+	
 	for(int i=0;i<attente.nbAttente;++i){
 		printf("[%d] vehicule n°%d \n",i,attente.list[i]);
 	}	
+}
+
+//ROUND ROBIN
+
+void round_robin(echangeur interchange){
+
+	
+
 }
 
 //MAIN FUNCTION
@@ -102,6 +112,7 @@ int main(void)
 	
     for (i = 0; i < NUM_INTERCHANGE; i++) {
 	Echangeur_id[i].nbV=0;
+	//init file d'attente
 
   }
 

@@ -12,12 +12,12 @@ typedef struct vehicule
 	    int type;
 	    int position;
 	    int itineraire;
-	    long num;
+	    int num;
 }vehicule ;
 
 typedef struct file_Attente
 {
-	int* list[CAPACITE];
+	int list[CAPACITE]; //a harmoniser
 	int lastUsed;
 	int nbAttente;
 }file_Attente;
@@ -33,8 +33,8 @@ typedef struct echangeur
 
 
 void erreur(const char *msg); //fonction pour afficher une erreur
-int get_random (int max); //fonction qui génère un nombre random entre 0 et max
-void AfficheEtatV(vehicule* current); //fonction qui affiche l'ete d'un véhicule
+int get_random (int max); //fonction qui génère un nombre random entre 0 et max-1
+void AfficheEtatV(vehicule* current); //fonction qui affiche l'etat un véhicule
 void *creationVehicule(void *data); //fonction d'initialisation d'un véhicule
 void enter_interchange(long numVehicule); //fonction d'arrivé dans un échangeur
 int sortir_liste(file_Attente attente); //fonction qui retire le véhicule en tete de la liste
