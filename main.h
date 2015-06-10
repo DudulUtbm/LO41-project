@@ -37,15 +37,17 @@ void erreur(const char *msg); //fonction pour afficher une erreur
 int get_random (int max); //fonction qui génère un nombre random entre 0 et max-1
 void AfficheEtatV(vehicule* current); //fonction qui affiche l'etat un véhicule
 void *creationVehicule(void *data); //fonction d'initialisation d'un véhicule
+void afficheEtatR(echangeur* current); //fonction qui affiche l'etat d'un echangeur
 void enter_interchange(long numVehicule); //fonction d'arrivé dans un échangeur
 int sortir_liste(file_Attente attente); //fonction qui retire le véhicule en tete de la liste
 void init_liste(file_Attente attente); //fonction qui initiale une liste d'attente
 void ajouter_liste(file_Attente attente, vehicule vehicule); //fonction qui ajoute un véhiculeà une liste d'attente
+void print_liste(file_Attente attente); //fonction qui affiche le contenue et les attributs de la liste 
 file_Attente min_veh(echangeur echangeur);//retourne la file d'attente avec le nb minimum de vehicule
 file_Attente max_veh(echangeur echangeur);//retourne la file d'attente avec le nb maximum de vehicule
 file_Attente recently_used(echangeur echangeur);//retourne la file d'attente avec utilisé le plus recement
 file_Attente last_used(echangeur echangeur);//retourne la file d'attente avec utilisé il y le plus longtemps
 
-void round_robin(echangeur echangeur); //fonction qui gère le round robin
+void round_robin(void* data); //fonction qui gère le round robin
 
 #endif 

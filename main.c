@@ -9,6 +9,7 @@
 
 #include "main.h"
 
+echangeur Echangeur_id[NUM_INTERCHANGE];
 
 //COMMON FUNCTIONS
 
@@ -143,12 +144,30 @@ file_Attente recently_used(echangeur echangeur){
 }
 //ROUND ROBIN
 
-void round_robin(echangeur echangeur){
+void round_robin(void* data){
 
-
-	
+	int i = (int)data;
+	echangeur current;
+	current = Echangeur_id[i];
+	afficheEtatR(&current);
+	/* while(1)
+	 * 	P(echangeur1)
+	 * 	launch round robin
+	 * 	reveille le thread en tete de la liste choisis
+	 * end
+	*/	
 
 }
+
+void afficheEtatR(echangeur* current){
+
+	    printf("\nJe suis l'echangeur de TID : %ld \n j'ai %d véhicules \n",(long) pthread_self(),current->nbV);
+    for(int i=0;i<4;++i){
+	    print_liste(current->file_attente[i]);
+    }
+    fflush(stdout);
+}
+
 
 //MAIN FUNCTION
 
@@ -158,7 +177,6 @@ int main(void)
     int i;
 	
 	//INTERCHANGE
-    echangeur Echangeur_id[NUM_INTERCHANGE];
 	
     for (i = 0; i < NUM_INTERCHANGE; i++) {
 	Echangeur_id[i].nbV=0;
@@ -187,11 +205,21 @@ int main(void)
     for (i = 0; i < NUM_VEHICLES; i++) {
 
 	if (pthread_create (&Vthread_id[i], &thread_attr,creationVehicule ,(void*)i) < 0) {
-          fprintf (stderr, "pthread_create error for thread \n");
-        exit (1);
-  }
+		fprintf (stderr, "pthread_create error for thread \n");
+		exit (1);
+	}
 	 
     }	    	 
+	    	//Round Robin
+	pthread_t Rthread_id[NUM_INTERCHANGE];
+	
+    for (i = 0; i < NUM_INTERCHANGE; i++) {
 
+	if (pthread_create (&Rthread_id[i], &thread_attr,round_robin ,(void*)i) < 0) {
+		fprintf (stderr, "pthread_create error for thread \n");
+		exit (1);
+	}
+	 
+    }	
 	pthread_exit(NULL);
 }
