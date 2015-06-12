@@ -1,53 +1,31 @@
 #ifndef MAIN_H_
 #define MAIN_H_
 
-//header of the main file
+#include <stdlib.h>
+#include <stdio.h>
+#include <sys/wait.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <pthread.h>
+#include <errno.h>
 
-#define CAPACITE 10  
+#include "vehicule.h"
+#include "echangeur.h"
+
 #define NUM_INTERCHANGE	4
 #define NUM_VEHICLES	10
 
-typedef struct vehicule
-{
-	    int type;
-	    int position;
-	    int itineraire;
-	    int num;
-}vehicule ;
+//header of the main file
 
-typedef struct file_Attente
-{
-	int list[CAPACITE]; //a harmoniser
-	int lastUsed;
-	int nbAttente;
-}file_Attente;
+//Global variables
 
-typedef struct echangeur
-{
-	    int nbV;
-	    file_Attente file_attente[4];
-/*	    file_Attente nord; id=0
-	    file_Attente sud; id=1
-	    file_Attente est; id=2
-	    file_Attente ouest; id=3  */
-}echangeur ;
-
+echangeur Echangeur_id[NUM_INTERCHANGE];
+pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+pthread_cond_t condition = PTHREAD_COND_INITIALIZER;
 
 void erreur(const char *msg); //fonction pour afficher une erreur
-int get_random (int max); //fonction qui génère un nombre random entre 0 et max-1
-void AfficheEtatV(vehicule* current); //fonction qui affiche l'etat un véhicule
-void *creationVehicule(void *data); //fonction d'initialisation d'un véhicule
-void afficheEtatR(echangeur* current); //fonction qui affiche l'etat d'un echangeur
-void enter_interchange(long numVehicule); //fonction d'arrivé dans un échangeur
-int sortir_liste(file_Attente attente); //fonction qui retire le véhicule en tete de la liste
-void init_liste(file_Attente attente); //fonction qui initiale une liste d'attente
-void ajouter_liste(file_Attente attente, vehicule vehicule); //fonction qui ajoute un véhiculeà une liste d'attente
-void print_liste(file_Attente attente); //fonction qui affiche le contenue et les attributs de la liste 
-file_Attente min_veh(echangeur echangeur);//retourne la file d'attente avec le nb minimum de vehicule
-file_Attente max_veh(echangeur echangeur);//retourne la file d'attente avec le nb maximum de vehicule
-file_Attente recently_used(echangeur echangeur);//retourne la file d'attente avec utilisé le plus recement
-file_Attente last_used(echangeur echangeur);//retourne la file d'attente avec utilisé il y le plus longtemps
-
-void round_robin(void* data); //fonction qui gère le round robin
+void* threadEchangeur(void* data); //fonction qui gère un echangeur. Elle est lancé 1 fois par echangeur
+void *threadVehicule(void *data); //fonction qui gère les déplacement d'un véhicule. Elle est lancée une fois par véhicule
 
 #endif 

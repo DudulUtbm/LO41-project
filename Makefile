@@ -1,6 +1,6 @@
 #my general makefile template :: -Wall -Werror -ansi -pedantic -fpic -g
 CXX = gcc
-CFLAGS = -pthread -std=c99
+CFLAGS = -pthread -std=c99 -g
 LIBSDIR = -L. -L/usr/lib
 INCLUDEDIR = -I. -I/usr/include
 
