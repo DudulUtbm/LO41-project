@@ -34,12 +34,10 @@ void* threadEchangeur(void* data){
 	while(1){
 		
 		pthread_mutex_lock(&mutex);
+		fprintf(stderr,"\nJe suis %ld, je me mets en attente.\n",pthread_self());
 		pthread_cond_wait (&condition,&mutex);
+		fprintf(stderr,"\nJe suis %ld, je me reveille.\n",pthread_self());
 		pthread_mutex_unlock(&mutex);
-
-		printf("Je me réveille \n");
-		sleep(5);
-
 
 	}
 
@@ -54,6 +52,7 @@ void *threadVehicule(void *data)
 
     enter_interchange(current->num,&mutex,&condition); //fonction d'arrivé dans un échangeur
 
+    deleteVehicule(current);
     pthread_exit(NULL);
 }
 
@@ -67,11 +66,13 @@ int main(void)
     int i;
 	
 	//INTERCHANGE
-	
+    fprintf(stderr,"\nCréation des échangeurs\n");
+
     for (i = 0; i < NUM_INTERCHANGE; i++) {
 	init_echangeur(&Echangeur_id[i],i);
   }
 
+    fprintf(stderr,"\nInitialisation des threads\n");
 	//THREAD INIT
 	pthread_attr_t thread_attr;
 
@@ -88,8 +89,10 @@ int main(void)
 	//THREAD CREATION
 
     	    	//VEHICLES
+        fprintf(stderr,"\nCréation des threads\n");
 	pthread_t Vthread_id[NUM_VEHICLES];
 	
+        fprintf(stderr,"\nthreads de véhicule\n");
     for (i = 0; i < NUM_VEHICLES; i++) {
 
 	if (pthread_create (&Vthread_id[i], &thread_attr,threadVehicule ,(void*)i) < 0) {
@@ -98,9 +101,10 @@ int main(void)
 	}
 	 
     }	    	 
-	    	//Round Robin
+	    	//INTERCHANGES
 	pthread_t Rthread_id[NUM_INTERCHANGE];
 	
+        fprintf(stderr,"\nthreads d'échangeur\n");
     for (i = 0; i < NUM_INTERCHANGE; i++) {
 
 	if (pthread_create (&Rthread_id[i], &thread_attr,threadEchangeur ,(void*)i) < 0) {

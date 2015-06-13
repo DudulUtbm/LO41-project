@@ -49,8 +49,17 @@ void enter_interchange(long numVehicule,pthread_mutex_t* mutex,pthread_cond_t* c
 
 	sleep(2);
 
+	fprintf(stderr,"\nJe suis %ld, je veux rentrer dans l'échangeur X.(A)\n",pthread_self());
+	//test si il reste de la place dans la liste d'attente
+	//pthread_cond_wait(fileAttente);
+	//
+	
 	pthread_mutex_lock(mutex);
+	fprintf(stderr,"\nJe suis %ld, je rentre dans l'échangeur X.(R)\n",pthread_self());
+	//entré dans la liste avec la fonction adéquate
 	pthread_cond_signal (condition);
+	fprintf(stderr,"\nJe suis %ld, je sors de l'échangeur X.(S)\n",pthread_self());
+	//sortie avec la fonction adéquate
 	pthread_mutex_unlock(mutex);
 
 	sleep(2);
