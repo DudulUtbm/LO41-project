@@ -61,8 +61,10 @@ pthread_cond_t ech3_fileO = PTHREAD_COND_INITIALIZER;
 //fonction generales
 
 void erreur(const char *msg); //fonction pour afficher une erreur
-pthread_mutex_t* selectMutex(int ID); //fonction pour determiner quel mutex utiliser
-pthread_cond_t* selectCond(int ID); //fonction pour determiner quelle condition utiliser
+pthread_mutex_t* selectMutex(int ID); //fonction pour determiner quel mutex utiliser (echangeur)
+pthread_cond_t* selectCond(int ID); //fonction pour determiner quelle condition utiliser (echangeur)
+pthread_mutex_t* selectMutexV(int position); //fonction pour determiner quel mutex utiliser (vehicule)
+pthread_cond_t* selectCondV(int position); //fonction pour determiner quelle condition utiliser (vehicule)
 void* threadEchangeur(void* data); //fonction qui gère un echangeur. Elle est lancé 1 fois par echangeur
 void *threadVehicule(void *data); //fonction qui gère les déplacement d'un véhicule. Elle est lancée une fois par véhicule
 pthread_cond_t* choose_liste(echangeur* current); //determine quelle condition liste sera la suivante a passer dans l'echangeur

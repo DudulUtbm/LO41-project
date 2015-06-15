@@ -14,6 +14,13 @@ void init_echangeur(echangeur* current,int id){
 
 }
 
+int compter_vehicule(echangeur* echangeur){ //fonction qui actualise le nb de vehicule en attente dans un echangeur
+	int nbVehicule=0;
+	for(int i=0;i<4;++i){
+		nbVehicule+=echangeur->file_attente[i].nbAttente;
+	}
+	return nbVehicule;
+}
 void afficheEtatR(echangeur* current){
 
 	    printf("\nJe suis l'echangeur %d, de TID : %ld \n j'ai %d véhicules \n",current->ID,(long) pthread_self(),current->nbV);

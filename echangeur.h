@@ -37,5 +37,6 @@ file_Attente* min_veh(echangeur* echangeur);//retourne la file d'attente avec le
 file_Attente* max_veh(echangeur* echangeur);//retourne la file d'attente avec le nb maximum de vehicule
 file_Attente* recently_used(echangeur* echangeur);//retourne la file d'attente avec utilisé le plus recement
 file_Attente* last_used(echangeur* echangeur);//retourne la file d'attente avec utilisé il y le plus longtemps
+int compter_vehicule(echangeur* echangeur); //fonction qui actualise le nb de vehicule en attente dans un echangeur
 
 #endif
